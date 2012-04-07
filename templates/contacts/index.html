@@ -1,0 +1,9 @@
+{%extends 'base.html' %}
+{%block content %}
+<h1>Contacts</h1>
+    <ul>
+    {% for c in contacts %}
+        <li>{{ c.name }}</li>
+    {%endfor %}
+</ul>
+{%endblock %}
