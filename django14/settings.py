@@ -125,7 +125,8 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'polls',
     'contacts',
-    'tastypie'
+    'tastypie',
+    'backbone_tastypie',
 )
 
 # A sample logging configuration. The only tangible logging
