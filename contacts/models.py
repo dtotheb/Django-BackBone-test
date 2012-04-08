@@ -10,4 +10,4 @@ class Contact(models.Model):
     user = models.ForeignKey(User, related_name='contacts', null=True)
 
     def __unicode__(self):
-        return self.name
+        return "%s - %s" % (self.name, self.email)
