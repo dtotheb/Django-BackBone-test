@@ -8,7 +8,7 @@ def index(request):
     """
     Index view - lists contacts
     """
-    contacts = Contact.objects.all()
+    contacts = Contact.objects.filter(user=request.user.id)
     form = ContactForm()
     context = {'contacts': contacts,
                'title': 'contacts',
@@ -24,7 +24,9 @@ def create(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            form.save()
+            contact = form.save(commit=False)
+            contact.user = request.user
+            contact.save()
             return redirect('index')
         else:
             return redirect('index')
