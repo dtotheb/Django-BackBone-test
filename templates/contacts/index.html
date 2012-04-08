@@ -1,9 +1,17 @@
 {%extends 'base.html' %}
 {%block content %}
-<h1>Contacts</h1>
+<h1>{{ title }}</h1>
     <ul>
     {% for c in contacts %}
         <li>{{ c.name }}</li>
     {%endfor %}
 </ul>
+
+<h2>Create Contact</h2>
+<form action="{% url contacts.views.create %}" method="post" id="createContact">
+    {% csrf_token %}
+    {{ form.name }}
+    {{ form.email }}
+    <input type="submit" value="Create Contact">
+</form>
 {%endblock %}

@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 class Contact(models.Model):
     name = models.CharField(max_length=50)
-    email = models.CharField(max_length=50)
+    email = models.EmailField()
     user = models.ForeignKey(User, related_name='contacts', null=True)
 
     def __unicode__(self):

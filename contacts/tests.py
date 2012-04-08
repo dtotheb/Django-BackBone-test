@@ -32,3 +32,11 @@ class index_TestCase(TestHelper, TestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'contacts/index.html')
+
+    def test_pageContext(self):
+        """
+        Tests that the page has the right stuff in it's context
+        """
+        context = self.client.get(self.url).context
+        self.assertIn('contacts', context)
+        self.assertIn('title', context)
