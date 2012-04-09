@@ -30,3 +30,9 @@ def create(request):
             return redirect('index')
         else:
             return redirect('index')
+
+def backbone(request):
+    """
+    Backbone view - used for testing the backbone.js view into the app
+    """
+    return render(request, 'contacts/backbone.html')

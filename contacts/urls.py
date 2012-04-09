@@ -11,4 +11,5 @@ urlpatterns = patterns('',
     url(r'^$', 'contacts.views.index', name='index'),
     url(r'^create$', 'contacts.views.create', name='create'),
     url(r'^api/', include(v1_api.urls)),
+    url(r'^backbone$', 'contacts.views.backbone', name='backbone')
     )

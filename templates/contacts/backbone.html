@@ -1,0 +1,25 @@
+{%extends 'base.html' %}
+
+{% block additional_head %}
+<script>
+var CONTACT_API = "{% url api_dispatch_list api_name="v1" resource_name="contact" %}";
+</script>
+
+<script type="text/javascript" src="{{ STATIC_URL }}js/app.js"></script>
+<script>
+$(document).ready(function(){
+        console.log('starting up backbone');
+        window.app = window.app || {};
+        app.List = new ListView({el:$('#contacts')});
+    });
+</script>
+{% endblock %}
+
+
+{% block content %}
+<h2>Backbone JS Test View</h2>
+<div id="app">
+    <ul id="contacts">
+    </ul>
+</div>
+{%endblock %}
