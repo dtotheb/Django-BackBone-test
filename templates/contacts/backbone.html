@@ -11,8 +11,8 @@ $(document).ready(function(){
         console.log('starting up backbone');
         window.app = window.app || {};
         app.contacts = new Contacts();
-        app.list = new ListView({
-            el:$('#contacts'),
+        app.list = new ListApp({
+            el:$('#app'),
             collection:app.contacts
         });
         app.contacts.maybeFetch({
@@ -24,13 +24,27 @@ $(document).ready(function(){
 <script type="text/template" id="contact-template">
     <span><%= name %></span> - <span><%= email %></span>
 </script>
+
+<script type="text/template" id="listApp-template">
+<div id="input">
+  <strong>Create Contact</strong>
+  <label>Name</label>
+  <input type="text" id="name_input">
+  <input type="hidden" id="userid_input" val="{{ userid }}">
+  <label>Email</label>
+  <input type="text" id="email_input"></input>
+  <button class="createcontact">New Contact</button>
+</div>
+<h2>Contacts</h2>
+<ul id="contacts">
+</ul>
+
+</script>
 {% endblock %}
 
 
 {% block content %}
 <h2>Backbone JS Test View</h2>
 <div id="app">
-    <ul id="contacts">
-    </ul>
 </div>
 {%endblock %}

@@ -35,4 +35,7 @@ def backbone(request):
     """
     Backbone view - used for testing the backbone.js view into the app
     """
-    return render(request, 'contacts/backbone.html')
+    context = { 'userid': request.user.id,
+                'title': 'Backbone'
+              }
+    return render(request, 'contacts/backbone.html', context)

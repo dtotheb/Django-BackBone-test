@@ -74,24 +74,75 @@
 
     window.ListView = Backbone.View.extend({
         initialize: function(){
-            _.bindAll(this, 'render');
-            
-            console.log('ListView: ', this);
-            console.log('Collection: ' , this.collection);
-            this.render();
+            _.bindAll(this, 'addOne', 'addAll');
+
+            this.collection.bind('add', this.addOne);
+            this.collection.bind('reset', this.addAll, this);
+            this.views = [];
+        },
+
+        addAll: function(){
+            this.views = [];
+            this.collection.each(this.addOne);
+        },
+
+        addOne: function(contact){
+            var view = new ContactView({
+                model: contact
+            });
+            $(this.el).prepend(view.render().el);
+            this.views.push(view);
+            view.bind('all', this.rethrow, this);
+        },
+
+        rethrow: function(){
+            this.trigger.apply(this, arguments);
+        }
+    });
+
+    window.ListApp = Backbone.View.extend({
+        el: "#app",
+
+        rethrow: function(){
+            this.trigger.apply(this, arguments);
         },
 
         render: function(){
-            var self = this;
+            $(this.el).html($('#listApp-template').html());
+            var list = new ListView({
+                collection: this.collection,
+                el: this.$('#contacts')
+            });
+            list.addAll();
+            list.bind('all', this.rethrow, this);
+            new InputView({
+                collection: this.collection,
+                el: this.$('#input')
+            });
+        } 
 
-            _(this.collection.models).each(function(item){
-                var conView = new ContactView({
-                    model: item
-                });
-                $(this.el).append(conView.render().el);
-            }, this );
+    });
 
+    window.InputView = Backbone.View.extend({
+    events: {
+        'click .createcontact': 'createContact',
+
+    },
+    createContact: function(){
+        console.log('createcontact');
+        var name = this.$('#name_input').val();
+        var email = this.$('#email_input').val();
+        var userid = this.$('#userid_input').val();
+        if(name){
+            this.collection.create({
+                    name: name,
+                    email: email,
+                    user: userid
+            });
+            this.$('#message').val('');
+            this.$('#email').val('');
         }
+    }
 
     });
 
