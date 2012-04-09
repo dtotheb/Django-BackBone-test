@@ -10,8 +10,19 @@ var CONTACT_API = "{% url api_dispatch_list api_name="v1" resource_name="contact
 $(document).ready(function(){
         console.log('starting up backbone');
         window.app = window.app || {};
-        app.List = new ListView({el:$('#contacts')});
+        app.contacts = new Contacts();
+        app.list = new ListView({
+            el:$('#contacts'),
+            collection:app.contacts
+        });
+        app.contacts.maybeFetch({
+            success: _.bind(app.list.render, app.list)
+        });
     });
+</script>
+
+<script type="text/template" id="contact-template">
+    <span><%= name %></span> - <span><%= email %></span>
 </script>
 {% endblock %}
 

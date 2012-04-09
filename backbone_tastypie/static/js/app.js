@@ -2,13 +2,13 @@
     window.Contact = Backbone.Model.extend({
         urlRoot: CONTACT_API,
         initialize: function(){
-            console.log('yay a contact initialized');
+            
         }
     });
 
     window.Contacts = Backbone.Collection.extend({
         urlRoot: CONTACT_API,
-        model: Contact, 
+        model: Contact,
 
         maybeFetch: function(options){
             // Helper function to fetch only if this collection has not been fetched before.
@@ -44,7 +44,7 @@
             });
 
             model.fetch(options);
-        },
+        }
 
     });
 
@@ -53,11 +53,12 @@
         className: 'contact',
 
         events: {
-            'click .permalink': 'navigate'           
+            'click .permalink': 'navigate'
         },
 
         initialize: function(){
             this.model.bind('change', this.render, this);
+            this.template = _.template($('#contact-template').html());
         },
 
         navigate: function(e){
@@ -66,21 +67,17 @@
         },
 
         render: function(){
-            $(this.el).html(this.model.get('name') + ' - ' + this.model.get('email'));
+            $(this.el).html(this.template(this.model.toJSON()));
             return this;
-        }                                        
+        }
     });
 
     window.ListView = Backbone.View.extend({
         initialize: function(){
             _.bindAll(this, 'render');
-            this.collection = new Contacts();
+            
             console.log('ListView: ', this);
-            con = new Contact({
-                        name: 'Dan',
-                        email: 'dan@dan.com'
-                            });
-            this.collection.add(con);
+            console.log('Collection: ' , this.collection);
             this.render();
         },
 
@@ -94,7 +91,7 @@
                 $(this.el).append(conView.render().el);
             }, this );
 
-        },
+        }
 
     });
 
