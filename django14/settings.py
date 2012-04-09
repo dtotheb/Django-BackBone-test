@@ -126,7 +126,6 @@ INSTALLED_APPS = (
     'polls',
     'contacts',
     'tastypie',
-    'backbone_tastypie',
 )
 
 # A sample logging configuration. The only tangible logging
