@@ -1,0 +1,14 @@
+Sample project for managing Contacts
+
+Built using a mix of frameworks:
+    Django 1.4 with
+        Tastypie api for easy RESTful urls
+
+    Backbone.js & underscore.js for 
+
+Setup steps(assuming virtualenv):
+    pip install -r requirements.txt
+    ./manage.py syncdb
+    ./manage runserver
+    Login at http://localhost:8000/admin
+    Goto http://localhost:8000/contacts/backbone for the Backbone powered interface
