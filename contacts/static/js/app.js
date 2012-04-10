@@ -49,16 +49,18 @@
     });
 
     window.ContactView = Backbone.View.extend({
-        tagName: 'li',
+        tagName: 'tr',
         className: 'contact',
 
         events: {
-            'click .permalink': 'navigate'
+            'click .permalink': 'navigate',
+            'click .delete': 'clear',
         },
 
         initialize: function(){
             this.model.bind('change', this.render, this);
             this.template = _.template($('#contact-template').html());
+            this.model.bind('destroy', this.remove, this);
         },
 
         navigate: function(e){
@@ -69,6 +71,14 @@
         render: function(){
             $(this.el).html(this.template(this.model.toJSON()));
             return this;
+        },
+
+        clear: function(){
+            this.model.destroy();
+        },
+
+        remove: function(){
+            $(this.el).remove();
         }
     });
 
@@ -90,7 +100,7 @@
             var view = new ContactView({
                 model: contact
             });
-            $(this.el).prepend(view.render().el);
+            $(this.el).append(view.render().el);
             this.views.push(view);
             view.bind('all', this.rethrow, this);
         },
@@ -126,8 +136,17 @@
     window.InputView = Backbone.View.extend({
     events: {
         'click .createcontact': 'createContact',
+        'keypress #name_input': 'createOnEnter',
+        'keypress #email_input': 'createOnEnter'
+    },
+
+    createOnEnter: function(e) {
+        if((e.keyCode || e.which) == 13) {
+            this.createContact();
+        }
 
     },
+
     createContact: function(){
         console.log('createcontact');
         var name = this.$('#name_input').val();

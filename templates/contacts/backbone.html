@@ -22,7 +22,7 @@ $(document).ready(function(){
 </script>
 
 <script type="text/template" id="contact-template">
-    <a href="<%= resource_uri %>?format=json"><span><%= name %></span> - <span><%= email %></span></a>
+    <td><a href="#"><%= name %></a></td><td><%= email %></td><td><span class="delete">x</span></td>
 </script>
 
 <script type="text/template" id="listApp-template">
@@ -36,8 +36,11 @@ $(document).ready(function(){
   <button class="createcontact">New Contact</button>
 </div>
 <h2>Contacts</h2>
-<ul id="contacts">
-</ul>
+<table id="contacts">
+<tr>
+    <th>Name</th><th>Email</th><th>Delete</th>
+</tr>
+</table>
 
 </script>
 {% endblock %}
