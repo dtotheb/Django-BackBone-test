@@ -56,6 +56,7 @@
             'click .permalink': 'navigate',
             'click .delete': 'clear',
             'click .edit': 'toggleEditMode',
+            'click .canceledit': 'toggleEditMode',
             'click .save': 'saveChanges'
         },
 

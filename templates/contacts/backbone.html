@@ -24,19 +24,21 @@ $(document).ready(function(){
 <script type="text/template" id="contact-template">
     <td><a href="#"><%= name %></a></td>
     <td><%= email %></td>
-    <td><span class="edit">edit</span></td>
-    <td><span class="delete">x</span></td>
+    <td><span class="edit btn">edit</span></td>
+    <td><span class="delete btn">delete</span></td>
 </script>
 
 <script type="text/template" id="listApp-template">
-<div id="input">
-  <strong>Create Contact</strong>
-  <label>Name</label>
-  <input type="text" id="name_input">
+<div>
+<form id="input" action="#" class="form-inline">
+
+<strong>Create Contact</strong>-  Name
+  <input type="text" id="name_input" class="input-medium">
   <input type="hidden" id="userid_input" val="{{ userid }}">
-  <label>Email</label>
-  <input type="text" id="email_input"></input>
-  <button class="createcontact">New Contact</button>
+  Email
+  <input type="text" id="email_input" class="input-medium"></input>
+  <span class="createcontact btn">New Contact</span>
+</form>
 </div>
 <h2>Contacts</h2>
 <table id="contacts">
@@ -48,16 +50,16 @@ $(document).ready(function(){
 </script>
 
 <script type="text/template" id="EditView-template">
-<td><input type="text" id="name_edit" value="<%= name %>"></td>
-<td><input type="text" id="email_edit" value="<%= email %>"></td>
-<td><span class="edit">edit</span></td>
-<td><span class="save">save</span></td>
+<td><input type="text" id="name_edit" class="input-medium" value="<%= name %>"></td>
+<td><input type="text" id="email_edit" class="input-medium" value="<%= email %>"></td>
+<td><span class="save btn">save</span></td>
+<td><span class="canceledit btn">cancel</span></td>
 </script>
 {% endblock %}
 
 
 {% block content %}
-<h2>Backbone JS Test View</h2>
+<h1>{{ title }}</h1>
 <div id="app">
 </div>
 {%endblock %}
