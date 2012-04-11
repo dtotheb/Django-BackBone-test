@@ -192,7 +192,14 @@
                     name: name,
                     email: email,
                     user: userid
-            });
+                },
+                { error: function(model,response){
+                    console.log(response);
+                    alert(response.responseText);
+                    },
+                  wait: true
+                }
+            );
             this.$('#message').val('');
             this.$('#email').val('');
         }

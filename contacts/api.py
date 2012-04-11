@@ -2,6 +2,8 @@ from tastypie.resources import ModelResource
 from contacts.models import Contact
 from django.contrib.auth.models import User
 from tastypie.authorization import Authorization
+from tastypie.validation import FormValidation
+from contacts.forms import ContactForm
 
 
 class ContactResource(ModelResource):
@@ -9,6 +11,7 @@ class ContactResource(ModelResource):
         queryset = Contact.objects.all()
         resource_name = 'contact'
         authorization = Authorization()
+        validation = FormValidation(form_class=ContactForm)
 
 
 class UserResource(ModelResource):
