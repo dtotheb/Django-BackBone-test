@@ -55,12 +55,41 @@
         events: {
             'click .permalink': 'navigate',
             'click .delete': 'clear',
+            'click .edit': 'toggleEditMode',
+            'click .save': 'saveChanges'
         },
 
         initialize: function(){
             this.model.bind('change', this.render, this);
-            this.template = _.template($('#contact-template').html());
+            this.view_template = _.template($('#contact-template').html());
+            this.edit_template = _.template($('#EditView-template').html());
+            this.editmode = false;
             this.model.bind('destroy', this.remove, this);
+        },
+
+        toggleEditMode: function(){
+            if (this.editmode == false) {
+                this.editmode = true;
+            }
+            else{
+                this.editmode = false;
+            }
+            this.render();
+
+        },
+
+        saveChanges: function(){
+            var name = this.$('#name_edit').val();
+            var email = this.$('#email_edit').val();
+
+
+            this.model.set({
+                name: name,
+                email: email
+            });
+            this.model.save();
+            this.editmode = false;
+            this.render();
         },
 
         navigate: function(e){
@@ -69,7 +98,12 @@
         },
 
         render: function(){
-            $(this.el).html(this.template(this.model.toJSON()));
+            if (this.editmode == true ){
+                $(this.el).html(this.edit_template(this.model.toJSON()));
+            }
+            else {
+                $(this.el).html(this.view_template(this.model.toJSON()));
+            }
             return this;
         },
 

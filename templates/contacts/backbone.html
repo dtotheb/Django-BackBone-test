@@ -22,7 +22,10 @@ $(document).ready(function(){
 </script>
 
 <script type="text/template" id="contact-template">
-    <td><a href="#"><%= name %></a></td><td><%= email %></td><td><span class="delete">x</span></td>
+    <td><a href="#"><%= name %></a></td>
+    <td><%= email %></td>
+    <td><span class="edit">edit</span></td>
+    <td><span class="delete">x</span></td>
 </script>
 
 <script type="text/template" id="listApp-template">
@@ -38,10 +41,17 @@ $(document).ready(function(){
 <h2>Contacts</h2>
 <table id="contacts">
 <tr>
-    <th>Name</th><th>Email</th><th>Delete</th>
+    <th>Name</th><th>Email</th><th>Edit</th><th></th>
 </tr>
 </table>
 
+</script>
+
+<script type="text/template" id="EditView-template">
+<td><input type="text" id="name_edit" value="<%= name %>"></td>
+<td><input type="text" id="email_edit" value="<%= email %>"></td>
+<td><span class="edit">edit</span></td>
+<td><span class="save">save</span></td>
 </script>
 {% endblock %}
 
