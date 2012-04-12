@@ -3,7 +3,17 @@
         urlRoot: CONTACT_API,
         initialize: function(){
             
+        },
+
+        validate: function(){
+            var email = this.get('email');
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            console.log(email);
+            if (!email.match(re)){
+                return "use a valid email address";
+            }
         }
+
     });
 
     window.Contacts = Backbone.Collection.extend({
@@ -84,13 +94,19 @@
             var email = this.$('#email_edit').val();
 
 
-            this.model.set({
+            this.model.save({
                 name: name,
                 email: email
-            });
-            this.model.save();
-            this.editmode = false;
-            this.render();
+                },
+                { 
+                  error: function(model,response){
+                        alert(response);
+                    },
+                  success: function(model,response){
+
+                  }
+                });
+            this.toggleEditMode();
         },
 
         navigate: function(e){
@@ -194,8 +210,7 @@
                     user: userid
                 },
                 { error: function(model,response){
-                    console.log(response);
-                    alert(response.responseText);
+                        alert(response);
                     },
                   wait: true
                 }
