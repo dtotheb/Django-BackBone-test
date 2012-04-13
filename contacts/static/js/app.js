@@ -92,7 +92,7 @@
         saveChanges: function(){
             var name = this.$('#name_edit').val();
             var email = this.$('#email_edit').val();
-
+            var view = this;
 
             this.model.save({
                 name: name,
@@ -103,10 +103,9 @@
                         alert(response);
                     },
                   success: function(model,response){
-
+                    view.toggleEditMode();
                   }
                 });
-            this.toggleEditMode();
         },
 
         navigate: function(e){
