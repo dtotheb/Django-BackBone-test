@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Jasmine Spec Runner</title>
+
+  <link rel="shortcut icon" type="image/png" href="lib/jasmine-1.2.0.rc3/jasmine_favicon.png">
+  <link rel="stylesheet" type="text/css" href="lib/jasmine-1.2.0.rc3/jasmine.css">
+  <script type="text/javascript" src="lib/jasmine-1.2.0.rc3/jasmine.js"></script>
+  <script type="text/javascript" src="lib/jasmine-1.2.0.rc3/jasmine-html.js"></script>
+  <script>
+  var CONTACT_API = "http://localhost:8000/contacts/api/v1/contact/";
+  </script>
+  <script type="text/javascript" src="lib/js-libs/jquery-min.js"></script>
+    <script type="text/javascript" src="lib/js-libs/underscore-min.js"></script>
+    <script type="text/javascript" src="lib/js-libs/backbone-min.js"></script>
+    <script type="text/javascript" src="lib/js-libs/backbone-tastypie.js"></script>
+
+
+  <!-- include source files here... -->
+  <script type="text/javascript" src="spec/SpecHelper.js"></script>
+  <script type="text/javascript" src="src/contact.js"></script>
+
+
+  <!-- include spec files here... -->
+
+    <script type="text/javascript" src="spec/contactSpec.js"></script>
+
+  <script type="text/javascript">
+    (function() {
+      var jasmineEnv = jasmine.getEnv();
+      jasmineEnv.updateInterval = 1000;
+
+      var htmlReporter = new jasmine.HtmlReporter();
+
+      jasmineEnv.addReporter(htmlReporter);
+
+      jasmineEnv.specFilter = function(spec) {
+        return htmlReporter.specFilter(spec);
+      };
+
+      var currentWindowOnload = window.onload;
+
+      window.onload = function() {
+        if (currentWindowOnload) {
+          currentWindowOnload();
+        }
+        execJasmine();
+      };
+
+      function execJasmine() {
+        jasmineEnv.execute();
+      }
+
+    })();
+  </script>
+
+
+<script type="text/template" id="EditView-template">
+<td><input type="text" id="name_edit" class="input-medium" value="<%= name %>"></td>
+<td><input type="text" id="email_edit" class="input-medium" value="<%= email %>"></td>
+<td><span class="save btn">save</span></td>
+<td><span class="canceledit btn">cancel</span></td>
+</script>
+
+<script type="text/template" id="contact-template">
+    <td><a href="#"><%= name %></a></td>
+    <td><%= email %></td>
+    <td><span class="edit btn">edit</span></td>
+    <td><span class="delete btn">delete</span></td>
+</script>
+
+</head>
+
+<body>
+</body>
+</html>
